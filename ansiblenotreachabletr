@@ -1,0 +1,1 @@
+I need to add ansible_ssh_pass=<mypassword> ansible_ssh_user=<myusername> next to the host IP in the /etc/ansible/hosts.
