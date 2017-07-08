@@ -1,0 +1,18 @@
+ansible-doc -l | wc -l
+ansible-doc -s yum
+ansible appgroup -m ping 
+ansible all -m ping
+ansible all -m ping -o
+ansible all -m shell -a "uname -a ; df -h"
+ansible all -m ping -v
+ansible appgroup -m yum -a -s "name=httpd state=present"
+visudo -f /etc/sudoers
+## ansible admin user
+user ALL=NOPASSWD: ALL
+rpm -qa | grep httpd
+service httpd status
+ansible appgroup -m service -a "name=httpd state=started" -s
+ansible all -m copy -a "src=/tmp/testingfile dest=/tmp/testingfile" -s
+sestatus
+ansible all -m yum -a "name=libselinux-python state=present" -s
+
