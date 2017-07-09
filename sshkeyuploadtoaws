@@ -1,0 +1,12 @@
+### playbook to upload custom sshkey pair to AWS
+
+- hosts: localhost
+  tasks:
+    - name: uploading my public key
+      ec2_key:
+         name: awssshkey
+	 region: ca-central-1a
+	 key_material: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhCywpijLh9V90Q2U4vJ8CQzDd49S6Vug0/inr+nVH/+rBFDM4MQhGvOhsrg7A7CcI9TOy4Rh0u+jDr5QtBUZK3nVNoEni7Bk+vpfJr0LUX0vtKx1TSCrcghbL6douKVhi7Z17OuNf803+dMVp6jBjW0Uov6hHQcZAFxmVuBZIIlx/7Gt3+3CRJvovFz6moibRYe1F0J2jvfw+pJULvNaz3sXpWpZa5Swvrnu+0imc6AgqD8cocbSo1vFCo0HVu0T/zksA4sHsDflFoR9x4KFITXMsRxZGrsEu2e3FeoL/kqtVUOMqGlEp+Pb4NXuccGEnCxS178lH6RVWMl1fTyaL root@chefnode.example.com
+
+
+	 state: present
