@@ -1,0 +1,22 @@
+---
+
+
+- hosts: appgroup
+  user: user
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: 1. Install latest version HTTP/Apache RPMs
+    yum: name=httpd state=present
+
+  - name: 2. start httpd service
+    service: name=httpd state=started 
+
+  - name: 3. copy the standard index.html file
+    copy: src=/tmp/index.html dest=/var/www/html/index.html mode=0664
+  - name: 4. add apache iptable rule
+    command: /sbin/iptables -I INPUT 1 -p tcp --dport http -j ACCEPT -m comment --comment "apache on port 80"
+
+  - name: 5. save iptable rule
+    command: iptables-save
+
