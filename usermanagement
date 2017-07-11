@@ -1,0 +1,66 @@
+### user management playbook
+---
+- hosts: all 
+  become_user: root
+  groups: "name={{ item }} state=present"
+  name: "add a group"
+  tags: add_new_group
+  tasks: ~
+  with_items: 
+    - demogrp
+    - demogrp1
+    - demogrp2
+    - demogrp3
+    - demogrp4
+
+- 
+  name: "add several users"
+  tags: "add_new_user groups=demogrp password=\"1\" shell=/bin/bash"
+  user: "name={{ item }} state=present"
+  with_items: 
+    - demouser
+    - demouser1
+    - demouser2
+    - demouser3
+    - demouser4
+ 
+- 
+  generate_ssh-keys: "yes ssh_key_bit=4096 ssh_key_file=.ssh/id_rsa"
+  name: "generate ssh keys for a new user"
+  tags: generate_ssh_keys
+  user: ~
+  with_items: 
+    - demouser
+    - demouser1
+    - demouser2
+    - demouser3
+    - demouser4
+
+ 
+- 
+  name: "update authorized keys for a user"
+  authorized_key: 
+    key: "{{ lookup('file', '/home/demouser/.ssh/id_rsa.pub')      }}"
+    user: "name={{item}} state=present"
+  with_items:
+    - demouser
+    - demouser1
+    - demouser2
+    - demouser3
+    - demouser4
+  tags: copy_pub_key
+
+ 
+
+ 
+- name: delete several users
+  tags: delete_new_user
+  #state=absent
+  user: "name={{ item }} state=absent"
+  with_items: 
+    - demouser
+    - demouser1
+    - demouser2
+    - demouser3
+    - demouser4
+
