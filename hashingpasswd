@@ -1,0 +1,23 @@
+---
+- hosts: all
+
+  user: user
+  become: yes
+  become_method: sudo
+  vars:
+    user_pass: HashedUserPass
+    root_pass: HashedRootPass
+  tasks:
+  - name: create new user
+    user:
+      name: nagap
+      uid: 2222
+      comment: naga
+      password: "{{ user_pass }}"
+      shell: /bin/bash
+    tags: create_user
+
+  - name: root password change
+    user: name=root update_password=always password="{{ root_pass }}"
+    tags: update_root_pass
+
