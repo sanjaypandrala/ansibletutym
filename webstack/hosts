@@ -1,0 +1,13 @@
+[all]
+node1.example.com
+node4.example.com
+node5.example.com 
+
+[appserver]
+node1.example.com
+
+[dbserver]
+node4.example.com
+
+[lbserver]
+node5.example.com 

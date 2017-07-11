@@ -1,0 +1,4 @@
+---
+dnsserver: 8.8.8.8
+ntpserver: 64.99.80.121
+ 

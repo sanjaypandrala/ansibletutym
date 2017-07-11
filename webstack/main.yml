@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  tasks:
+
+- name: apply common config
+  hosts: all
+  user: user
+  #become: yes
+  #become_method: sudo
+  tasks:
+
+  roles:
+    - common
+
+- name: install and config apache webservers
+  hosts: appserver
+  user: user
+  #become: yes
+  #become_method: sudo
+  tasks:
+
+  roles:
+    - web
